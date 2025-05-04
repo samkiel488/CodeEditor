@@ -1,25 +1,34 @@
-/* Make textarea overlay match Prism.js styling */
-#editableCode {
-  font-family: monospace;
-  line-height: 1.5;
-  white-space: pre;
-  overflow: auto;
-}
-
+/* Line numbers */
 .line-numbers {
+  position: relative;
+  padding-left: 3.5em !important;
   counter-reset: line;
+  overflow-y: auto;
+  height: 100%;
 }
 
 .line-numbers code {
   display: block;
-  padding-left: 3.5em !important;
+  font-family: 'Fira Code', monospace;
 }
 
-.line-numbers code:before {
-  counter-increment: line;
-  content: counter(line);
+.line-numbers .line-number {
   position: absolute;
   left: 1em;
   color: #6B7280;
   user-select: none;
+}
+
+/* Editor textarea overlay */
+#editableCode {
+  font-family: 'Fira Code', monospace;
+  line-height: 1.5;
+  white-space: pre;
+  overflow: auto;
+  tab-size: 2;
+}
+
+/* Preview iframe */
+#iframe {
+  border: none;
 }

@@ -3,50 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tailwind Code Editor</title>
-  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/themes/prism-tomorrow.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/prism.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/components/prism-javascript.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+  <title>Code Editor with Live Preview</title>
+  <!-- Prism.js Syntax Highlighting -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    }
-  </script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-200">
-  <div class="container mx-auto p-4 max-w-4xl">
+  <div class="container mx-auto p-4 max-w-6xl">
     <!-- Header -->
-    <div class="flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Code Editor</h1>
-      <button id="themeToggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm">
-        🌙 Dark Mode
-      </button>
-    </div>
-
-    <!-- Editor Box -->
-    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-      <!-- Editor Toolbar -->
-      <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-2 border-b border-gray-200 dark:border-gray-600">
-        <span class="text-sm font-mono text-gray-500 dark:text-gray-400">JavaScript</span>
-        <button id="copyBtn" class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm" data-clipboard-target="#codeEditor">
-          📋 Copy
+    <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Code Editor + Live Preview</h1>
+      <div class="flex gap-2">
+        <select id="languageSelect" class="px-3 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm">
+          <option value="html">HTML</option>
+          <option value="css">CSS</option>
+          <option value="javascript">JavaScript</option>
+        </select>
+        <button id="runBtn" class="px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg text-sm">
+          ▶ Run Code
+        </button>
+        <button id="themeToggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm">
+          🌙 Dark Mode
         </button>
       </div>
+    </div>
 
-      <!-- Code Editor -->
-      <div class="relative">
-        <pre class="line-numbers"><code id="codeEditor" class="language-javascript">
-function greet(name) {
-  return "Hello, " + name + "!";
-}
-console.log(greet("World"));</code></pre>
-        <textarea id="editableCode" class="absolute inset-0 w-full h-full p-4 font-mono text-transparent caret-white bg-transparent resize-none outline-none" spellcheck="false"></textarea>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <!-- Editor Column -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-2 border-b border-gray-200 dark:border-gray-600">
+          <span id="languageLabel" class="text-sm font-mono text-gray-500 dark:text-gray-400">HTML</span>
+          <button id="copyBtn" class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm">
+            📋 Copy
+          </button>
+        </div>
+        <div class="relative h-96">
+          <pre class="line-numbers h-full"><code id="codeEditor" class="language-html"></code></pre>
+          <textarea id="editableCode" class="absolute inset-0 w-full h-full p-4 font-mono text-transparent caret-white bg-transparent resize-none outline-none" spellcheck="false"></textarea>
+        </div>
+      </div>
+
+      <!-- Preview Column -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div class="bg-gray-50 dark:bg-gray-700 p-2 border-b border-gray-200 dark:border-gray-600">
+          <span class="text-sm font-mono text-gray-500 dark:text-gray-400">Preview</span>
+        </div>
+        <iframe id="previewFrame" class="w-full h-96 bg-white"></iframe>
       </div>
     </div>
   </div>
 
+  <!-- Prism.js and Clipboard.js -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-html.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+  <!-- Custom JS -->
   <script src="script.js"></script>
 </body>
 </html>

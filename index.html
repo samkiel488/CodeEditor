@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tailwind Code Editor</title>
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/themes/prism-tomorrow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/components/prism-javascript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen transition-colors duration-200">
+  <div class="container mx-auto p-4 max-w-4xl">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Code Editor</h1>
+      <button id="themeToggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded-lg text-sm">
+        🌙 Dark Mode
+      </button>
+    </div>
+
+    <!-- Editor Box -->
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <!-- Editor Toolbar -->
+      <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-700 p-2 border-b border-gray-200 dark:border-gray-600">
+        <span class="text-sm font-mono text-gray-500 dark:text-gray-400">JavaScript</span>
+        <button id="copyBtn" class="px-3 py-1 bg-blue-500 hover:bg-blue-600 text-white rounded text-sm" data-clipboard-target="#codeEditor">
+          📋 Copy
+        </button>
+      </div>
+
+      <!-- Code Editor -->
+      <div class="relative">
+        <pre class="line-numbers"><code id="codeEditor" class="language-javascript">
+function greet(name) {
+  return "Hello, " + name + "!";
+}
+console.log(greet("World"));</code></pre>
+        <textarea id="editableCode" class="absolute inset-0 w-full h-full p-4 font-mono text-transparent caret-white bg-transparent resize-none outline-none" spellcheck="false"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

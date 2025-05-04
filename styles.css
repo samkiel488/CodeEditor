@@ -1,0 +1,25 @@
+/* Make textarea overlay match Prism.js styling */
+#editableCode {
+  font-family: monospace;
+  line-height: 1.5;
+  white-space: pre;
+  overflow: auto;
+}
+
+.line-numbers {
+  counter-reset: line;
+}
+
+.line-numbers code {
+  display: block;
+  padding-left: 3.5em !important;
+}
+
+.line-numbers code:before {
+  counter-increment: line;
+  content: counter(line);
+  position: absolute;
+  left: 1em;
+  color: #6B7280;
+  user-select: none;
+}
